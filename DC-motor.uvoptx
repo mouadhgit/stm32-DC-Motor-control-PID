@@ -160,12 +160,12 @@
         <Ww>
           <count>0</count>
           <WinNumber>2</WinNumber>
-          <ItemText>error,0x0A</ItemText>
+          <ItemText>currentMillis,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>2</WinNumber>
-          <ItemText>adjustement,0x0A</ItemText>
+          <ItemText>encoderValue,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
@@ -261,7 +261,7 @@
 
   <Group>
     <GroupName>::Device</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>1</RteFlg>

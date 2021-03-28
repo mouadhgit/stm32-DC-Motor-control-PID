@@ -5,6 +5,19 @@
   Control DC Motor speed with PID algorithme based at STM32F407VG board
   Author:   Mouadh Dahech
   Updated:  3/21/2021
+	
+	********************************* Wiring *************************************
+	* L298N:
+	- IN1 -> PB0
+	- IN2 -> PB1
+	- ENA -> PD12
+	* MOTOR ENCODER :
+	- RED   -> OUT1
+	- BLACK -> OUT2
+	- GREEN -> GND
+	- BLUE  -> 5V
+	- WHITE -> PA0
+	
   ******************************************************************************
   Copyright (C) 
 
@@ -52,10 +65,10 @@ int main(void)
   Tim7Config();
   PWM_Config();
   EXTI_config();
-  Tim6Config();
   GPIO_config();
   while (1)
-  {   
+  {  
+		motorSpeed = 300;	
     currentMillis = millis();
     if (currentMillis - previousMillis > interval) 
     {
@@ -63,6 +76,8 @@ int main(void)
       rpm = (float)(encoderValue * 60 / encoderoutput);
       encoderValue = 0;
     }
+		
+		
  
   }
 
@@ -91,7 +106,7 @@ void PWM_Config()
   TIM4->CCMR1 |= TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_2 |  TIM_CCMR1_OC1PE;
 
   // 50 hz frq          
-  TIM4->PSC  = 320;       //16000000/320*1000
+  TIM4->PSC  = 320;       //16000000/320*1000 = 50 hz
   TIM4->ARR  = 1000;     
 
   //duty cycle: 0--1000; 
@@ -132,9 +147,7 @@ void EXTI_config()
 /************************ This function to config GPIO Pins ************************/
 void GPIO_config()
 {
-  //RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;
-  //GPIOD->MODER = 0X55000000;
-  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN ;
+  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;
   GPIOB->MODER = 0x5;
   GPIOB->ODR = 0x0002;
 }
